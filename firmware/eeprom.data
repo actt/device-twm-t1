@@ -1,0 +1,244 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+<meta http-equiv="content-type" content="text/html; charset=utf-8" />
+<title>/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data - Changes - FROYO-QRD-GB-DSDS-7225 - Code Aurora Forum</title>
+<meta name="description" content="Redmine" />
+<meta name="keywords" content="issue,bug,tracker" />
+<meta name="csrf-param" content="authenticity_token"/>
+<meta name="csrf-token" content="BxKgL60FumQ9BGfycVJKyalJoUlMABSO24HF8e1g06c="/>
+<link rel='shortcut icon' href='/git/favicon.ico?1329237206' />
+<link href="/git/stylesheets/application.css?1329237206" media="all" rel="stylesheet" type="text/css" />
+
+<script src="/git/javascripts/prototype.js?1329237206" type="text/javascript"></script>
+<script src="/git/javascripts/effects.js?1329237206" type="text/javascript"></script>
+<script src="/git/javascripts/dragdrop.js?1329237206" type="text/javascript"></script>
+<script src="/git/javascripts/controls.js?1329237206" type="text/javascript"></script>
+<script src="/git/javascripts/application.js?1329237206" type="text/javascript"></script>
+<script type="text/javascript">
+//<![CDATA[
+Event.observe(window, 'load', function(){ new WarnLeavingUnsaved('The current page contains unsaved text that will be lost if you leave this page.'); });
+//]]>
+</script>
+
+<!--[if IE 6]>
+    <style type="text/css">
+      * html body{ width: expression( document.documentElement.clientWidth < 900 ? '900px' : '100%' ); }
+      body {behavior: url(/git/stylesheets/csshover.htc?1329237206);}
+    </style>
+<![endif]-->
+
+<!-- page specific tags -->
+
+  <script src="/git/javascripts/repository_navigation.js?1329237206" type="text/javascript"></script>
+</head>
+<body class="controller-repositories action-changes">
+<div id="wrapper">
+<div id="wrapper2">
+<div id="top-menu">
+    <div id="account">
+        <ul><li><a href="/git/login" class="login">Sign in</a></li></ul>    </div>
+    
+    <ul><li><a href="/git/" class="home">Home</a></li>
+<li><a href="/git/projects" class="projects">Projects</a></li>
+<li><a href="http://www.redmine.org/guide" class="help">Help</a></li></ul></div>
+
+<div id="header">
+    
+    <div id="quick-search">
+        <form action="/git/search/index/qrd-gb-dsds-7225" method="get">
+        <input name="changesets" type="hidden" value="1" />
+        <label for='q'>
+          <a href="/git/search/index/qrd-gb-dsds-7225" accesskey="4">Search</a>:
+        </label>
+        <input accesskey="f" class="small" id="q" name="q" size="20" type="text" />
+        </form>
+        
+    </div>
+    
+
+    <h1><a href="/git/projects/giga-byte?jump=repository" class="root">Giga-Byte</a> » FROYO-QRD-GB-DSDS-7225</h1>
+
+    
+    <div id="main-menu">
+        <ul><li><a href="/git/projects/qrd-gb-dsds-7225" class="overview">Overview</a></li>
+<li><a href="/git/projects/qrd-gb-dsds-7225/activity" class="activity">Activity</a></li>
+<li><a href="/git/projects/qrd-gb-dsds-7225/wiki" class="wiki">Wiki</a></li>
+<li><a href="/git/projects/qrd-gb-dsds-7225/files" class="files">Files</a></li>
+<li><a href="/git/projects/qrd-gb-dsds-7225/repository" class="repository selected">Repository</a></li></ul>
+    </div>
+    
+</div>
+
+<div class="nosidebar" id="main">
+    <div id="sidebar">
+        
+        
+    </div>
+
+    <div id="content">
+        
+        
+
+<div class="contextual">
+  
+
+<a href="/git/projects/qrd-gb-dsds-7225/repository/statistics" class="icon icon-stats">Statistics</a>
+
+<form action="/git/projects/qrd-gb-dsds-7225/repository/changes/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data?rev=" id="revision_selector" method="get">  <!-- Branches Dropdown -->
+      | Branch: 
+    <select id="branch" name="branch"><option value=""></option>
+<option value="master">master</option></select>
+  
+      | Tag: 
+    <select id="tag" name="tag"><option value=""></option>
+<option value="R7225MCNCJNLYB232023">R7225MCNCJNLYB232023</option>
+<option value="R7225MCNCJNLYB23202301">R7225MCNCJNLYB23202301</option>
+<option value="R7225MCNCJNLYB23202302">R7225MCNCJNLYB23202302</option>
+<option value="R7225MCNCJNLYB23202303">R7225MCNCJNLYB23202303</option>
+<option value="R7225MCNCJNLYB23202304">R7225MCNCJNLYB23202304</option></select>
+  
+  | Revision: 
+  <input id="rev" name="rev" size="8" type="text" value="0c15e6aa7e51b42c5c0977389ffa5372c95ccb29" />
+</form>
+</div>
+
+<h2>
+  <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show">root</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system">system</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan">wlan</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan/atheros">atheros</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary">AR6kSDK.2.2.1.151-proprietary</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target">target</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002">AR6002</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0">hw2.0</a>
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/show/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin">bin</a>
+
+
+    / <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/changes/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data">eeprom.data</a>
+
+
+@ 0c15e6aa
+
+
+</h2>
+
+<p>
+
+<p>
+History |
+
+    <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/entry/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data">View</a> |
+
+
+    <a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/annotate/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data">Annotate</a> |
+
+<a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29/raw/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data">Download</a>
+(48 Bytes)
+</p>
+
+
+</p>
+
+
+
+
+<form action="/git/projects/qrd-gb-dsds-7225/repository/diff/system/wlan/atheros/AR6kSDK.2.2.1.151-proprietary/target/AR6002/hw2.0/bin/eeprom.data" method="get">
+<table class="list changesets">
+<thead><tr>
+
+<th>#</th>
+<th></th>
+<th></th>
+<th>Date</th>
+<th>Author</th>
+<th>Comment</th>
+</tr></thead>
+<tbody>
+
+
+
+<tr class="changeset odd">
+
+<td class="id"><a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/0c15e6aa7e51b42c5c0977389ffa5372c95ccb29" title="Revision 0c15e6aa">0c15e6aa</a></td>
+<td class="checkbox"><input checked="checked" id="cb-1" name="rev" onclick="$('cbto-2').checked=true;" type="radio" value="0c15e6aa7e51b42c5c0977389ffa5372c95ccb29" /></td>
+<td class="checkbox"></td>
+<td class="committed_on">07/18/2011 05:25 am</td>
+<td class="author">mt.wu</td>
+
+  <td class="comments"><p>R7225MCNCJNLYB23202304</p></td>
+
+</tr>
+
+
+<tr class="changeset even">
+
+<td class="id"><a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/af8ce7dda6594bb7bff9ada69051c7a9365c3b50" title="Revision af8ce7dd">af8ce7dd</a></td>
+<td class="checkbox"><input id="cb-2" name="rev" onclick="$('cbto-3').checked=true;" type="radio" value="af8ce7dda6594bb7bff9ada69051c7a9365c3b50" /></td>
+<td class="checkbox"><input checked="checked" id="cbto-2" name="rev_to" onclick="if ($('cb-2').checked==true) {$('cb-1').checked=true;}" type="radio" value="af8ce7dda6594bb7bff9ada69051c7a9365c3b50" /></td>
+<td class="committed_on">05/04/2011 10:51 pm</td>
+<td class="author">mt.wu</td>
+
+  <td class="comments"><p>R7225MCNCJNLYB23202302</p></td>
+
+</tr>
+
+
+<tr class="changeset odd">
+
+<td class="id"><a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/f6156a77044113680d038934b06bde333a1e69ea" title="Revision f6156a77">f6156a77</a></td>
+<td class="checkbox"><input id="cb-3" name="rev" onclick="$('cbto-4').checked=true;" type="radio" value="f6156a77044113680d038934b06bde333a1e69ea" /></td>
+<td class="checkbox"><input id="cbto-3" name="rev_to" onclick="if ($('cb-3').checked==true) {$('cb-2').checked=true;}" type="radio" value="f6156a77044113680d038934b06bde333a1e69ea" /></td>
+<td class="committed_on">03/31/2011 02:59 am</td>
+<td class="author">mt.wu</td>
+
+  <td class="comments"><p>R7225MCNCJNLYB23202301</p></td>
+
+</tr>
+
+
+<tr class="changeset even">
+
+<td class="id"><a href="/git/projects/qrd-gb-dsds-7225/repository/revisions/21e9000a3796af85eca82f0c4dd9db4e0fbd2dbd" title="Revision 21e9000a">21e9000a</a></td>
+<td class="checkbox"></td>
+<td class="checkbox"><input id="cbto-4" name="rev_to" onclick="if ($('cb-4').checked==true) {$('cb-3').checked=true;}" type="radio" value="21e9000a3796af85eca82f0c4dd9db4e0fbd2dbd" /></td>
+<td class="committed_on">03/03/2011 07:07 pm</td>
+<td class="author">mt.wu</td>
+
+  <td class="comments"><p>R7225MCNCJNLYB232023</p></td>
+
+</tr>
+
+
+</tbody>
+</table>
+<input type="submit" value="View differences" />
+</form>
+
+
+
+        
+        <div style="clear:both;"></div>
+    </div>
+</div>
+
+<div id="ajax-indicator" style="display:none;"><span>Loading...</span></div>
+
+<div id="footer">
+  <div class="bgl"><div class="bgr">
+    Powered by <a href="http://www.redmine.org/">Redmine</a> &copy; 2006-2012 Jean-Philippe Lang
+  </div></div>
+</div>
+</div>
+</div>
+
+</body>
+</html>

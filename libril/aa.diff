@@ -1,0 +1,227 @@
+只在 . 存在：aa.diff
+diff -ur ./Android.mk ../../../../hardware/ril/libril//Android.mk
+--- ./Android.mk	2011-10-12 15:32:31.047000998 +0800
++++ ../../../../hardware/ril/libril//Android.mk	2011-10-12 15:33:12.597001003 +0800
+@@ -1,14 +1,8 @@
+ # Copyright 2006 The Android Open Source Project
+ 
+-ifeq ($(TARGET_BOOTLOADER_BOARD_NAME),blade)
+-
+-MODULE.TARGET.SHARED_LIBRARIES.libril :=
+-
+ LOCAL_PATH:= $(call my-dir)
+ include $(CLEAR_VARS)
+ 
+-LOCAL_MODULE_TAGS := optional
+-
+ LOCAL_SRC_FILES:= \
+     ril.cpp \
+     ril_event.cpp
+@@ -20,6 +14,9 @@
+     libhardware_legacy
+ 
+ LOCAL_CFLAGS :=
++ifdef BOARD_USE_NEW_LIBRIL_HTC
++    LOCAL_CFLAGS += -DNEW_LIBRIL_HTC
++endif
+ 
+ LOCAL_MODULE:= libril
+ 
+@@ -27,4 +24,24 @@
+ 
+ include $(BUILD_SHARED_LIBRARY)
+ 
+-endif # TARGET_BOOTLOADER_BOARD_NAME
++
++# For RdoServD which needs a static library
++# =========================================
++ifneq ($(ANDROID_BIONIC_TRANSITION),)
++include $(CLEAR_VARS)
++
++LOCAL_SRC_FILES:= \
++    ril.cpp
++
++LOCAL_STATIC_LIBRARIES := \
++    libutils_static \
++    libcutils
++
++LOCAL_CFLAGS :=
++
++LOCAL_MODULE:= libril_static
++
++LOCAL_LDLIBS += -lpthread
++
++include $(BUILD_STATIC_LIBRARY)
++endif # ANDROID_BIONIC_TRANSITION
+diff -ur ./ril.cpp ../../../../hardware/ril/libril//ril.cpp
+--- ./ril.cpp	2011-10-12 15:32:31.047000998 +0800
++++ ../../../../hardware/ril/libril//ril.cpp	2011-10-12 15:33:12.617001010 +0800
+@@ -48,7 +48,6 @@
+ #include <assert.h>
+ #include <netinet/in.h>
+ #include <cutils/properties.h>
+-#include <termios.h>
+ 
+ #include <ril_event.h>
+ 
+@@ -143,6 +142,7 @@
+     struct UserCallbackInfo *p_next;
+ } UserCallbackInfo;
+ 
++
+ /*******************************************************************/
+ 
+ RIL_RadioFunctions s_callbacks = {0, NULL, NULL, NULL, NULL, NULL};
+@@ -242,9 +242,8 @@
+ #endif
+ 
+ static UserCallbackInfo * internalRequestTimedCallback
+-    (RIL_TimedCallback callback, void *param, const struct timeval *relativeTime);
+-
+-static void internalRemoveTimedCallback(void *callbackInfo);
++    (RIL_TimedCallback callback, void *param,
++        const struct timeval *relativeTime);
+ 
+ /** Index == requestNumber */
+ static CommandInfo s_commands[] = {
+@@ -2650,6 +2649,7 @@
+ 
+     rilEventAddWakeup (&s_debug_event);
+ #endif
++
+ }
+ 
+ static int
+@@ -2679,6 +2679,7 @@
+     return ret;
+ }
+ 
++
+ extern "C" void
+ RIL_onRequestComplete(RIL_Token t, RIL_Errno e, void *response, size_t responselen) {
+     RequestInfo *pRI;
+@@ -2703,13 +2704,6 @@
+     appendPrintBuf("[%04d]< %s",
+         pRI->token, requestToString(pRI->pCI->requestNumber));
+ 
+-    if (pRI->pCI->requestNumber == RIL_REQUEST_BASEBAND_VERSION) {
+-        char baseband[PROPERTY_VALUE_MAX];
+-
+-        property_get("ro.build.baseband_version", baseband, "QCT unknown");
+-        response=strdup(baseband);
+-    }
+-
+     if (pRI->cancelled == 0) {
+         Parcel p;
+ 
+@@ -2896,7 +2890,7 @@
+ */
+ static UserCallbackInfo *
+ internalRequestTimedCallback (RIL_TimedCallback callback, void *param,
+-                              const struct timeval *relativeTime)
++                                const struct timeval *relativeTime)
+ {
+     struct timeval myRelativeTime;
+     UserCallbackInfo *p_info;
+@@ -2905,6 +2899,7 @@
+ 
+     p_info->p_callback = callback;
+     p_info->userParam = param;
++
+     if (relativeTime == NULL) {
+         /* treat null parameter as a 0 relative time */
+         memset (&myRelativeTime, 0, sizeof(myRelativeTime));
+@@ -2921,27 +2916,11 @@
+     return p_info;
+ }
+ 
+-static void
+-internalRemoveTimedCallback(void *callbackInfo)
+-{
+-    UserCallbackInfo *p_info;
+-    p_info = (UserCallbackInfo *)callbackInfo;
+-    LOGI("remove timer callback event");
+-    if(p_info) {
+-        if (ril_timer_delete(&(p_info->event)))
+-			free(p_info);
+-    }
+-}
+ 
+-extern "C" void *
++extern "C" void
+ RIL_requestTimedCallback (RIL_TimedCallback callback, void *param,
+                                 const struct timeval *relativeTime) {
+-   return internalRequestTimedCallback (callback, param, relativeTime);
+-}
+-
+-extern "C" void
+-RIL_removeTimedCallback (void *callbackInfo) {
+-    internalRemoveTimedCallback(callbackInfo);
++    internalRequestTimedCallback (callback, param, relativeTime);
+ }
+ 
+ const char *
+diff -ur ./ril_event.cpp ../../../../hardware/ril/libril//ril_event.cpp
+--- ./ril_event.cpp	2011-10-12 15:32:31.047000998 +0800
++++ ../../../../hardware/ril/libril//ril_event.cpp	2011-10-12 15:33:12.617001010 +0800
+@@ -122,18 +122,15 @@
+     dump_event(ev);
+ }
+ 
+-static bool removeFromList(struct ril_event * ev)
++static void removeFromList(struct ril_event * ev)
+ {
+     dlog("~~~~ Removing event ~~~~");
+-	/* Make sure the event actually exists */
+-	if (!(ev->prev && ev->next))
+-		return false;
+     dump_event(ev);
++
+     ev->next->prev = ev->prev;
+     ev->prev->next = ev->next;
+     ev->next = NULL;
+     ev->prev = NULL;
+-	return true;
+ }
+ 
+ 
+@@ -315,25 +312,13 @@
+     dlog("~~~~ -ril_timer_add ~~~~");
+ }
+ 
+-// Remove event from timer list
+-bool ril_timer_delete(struct ril_event *tev)
+-{
+-	bool ret = true;
+-    dlog("~~~~timer event delete=%x",(unsigned int)tev);
+-    MUTEX_ACQUIRE();
+-    ret = removeFromList(tev);
+-    MUTEX_RELEASE();
+-	return ret;
+-}
+-
+ // Remove event from watch or timer list
+ void ril_event_del(struct ril_event * ev)
+ {
+-    dlog("~~~~ +ril_event_del event= %x ~~~~", (unsigned int)ev);
++    dlog("~~~~ +ril_event_del ~~~~");
+     MUTEX_ACQUIRE();
+ 
+     if (ev->index < 0 || ev->index >= MAX_FD_EVENTS) {
+-        MUTEX_RELEASE();
+         return;
+     }
+ 
+diff -ur ./ril_event.h ../../../../hardware/ril/libril//ril_event.h
+--- ./ril_event.h	2011-10-12 15:32:31.047000998 +0800
++++ ../../../../hardware/ril/libril//ril_event.h	2011-10-12 15:33:12.617001010 +0800
+@@ -47,9 +47,6 @@
+ // Remove event from watch list
+ void ril_event_del(struct ril_event * ev);
+ 
+-// Remove event from timer list
+-bool ril_timer_delete(struct ril_event * ev);
+-
+ // Event loop
+ void ril_event_loop();
+ 
